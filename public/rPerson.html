@@ -69,6 +69,11 @@
             const gender = document.getElementById('gender').value;
             const bloodGroup = document.getElementById('bloodGroup').value;
 
+            if(!name && !dateOfBirth && !fatherName && !motherName){
+                alert('Please, fill in all the required details before submiting.');
+                return;
+            }
+
             const formData = {
                 name,
                 dateOfBirth,
@@ -88,6 +93,8 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
+                alert('Data has been received, you will be redirected to the Citizen sheet to check your data.');
+                window.location.href = '/vPerson.html';
                 // Handle success, e.g., show a success message to the user
             })
             .catch((error) => {

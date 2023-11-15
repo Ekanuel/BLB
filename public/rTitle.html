@@ -65,20 +65,28 @@
                 satellitePhoto
             };
 
-            fetch('/title', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData),
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch((error) => {
-                console.log('Error:', error);
-            });
+            if (ownerName && location && size && coordinates && titleNumber && satellitePhoto) {
+                fetch('/title', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    alert('Data has been received, you will be redirected to the Title sheet to check for you land listing.');
+                    window.location.href = '/vTitle.html';
+                })
+                .catch((error) => {
+                    console.log('Error:', error);
+                });
+            }
+            else{
+                alert('Please fill in all the fields with relevant data');
+            }
+
         }
     </script>
 </body>
