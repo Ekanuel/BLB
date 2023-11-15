@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Title</title>
+</head>
+<body>
+    <h2>Register Title</h2>
+    
+    <form id="titleForm">
+        <label for="ownerName">Owner's Name:</label>
+        <input type="text" id="ownerName" name="ownerName" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="size">Size:</label>
+        <input type="text" id="size" name="size" required>
+
+        <label for="coordinates">Coordinates:</label>
+        <input type="text" id="coordinates" name="coordinates" required>
+
+        <label for="titleNumber">Title Number:</label>
+        <input type="text" id="titleNumber" name="titleNumber" required>
+
+        <label for="satellitePhoto">Satellite Photo (Link):</label>
+        <input type="text" id="satellitePhoto" name="satellitePhoto">
+
+        <button type="button" onclick="registerTitle()">Register Title</button>
+    </form>
+
+    <script>
+        function registerTitle() {
+            const ownerName = document.getElementById('ownerName').value;
+            const location = document.getElementById('location').value;
+            const size = document.getElementById('size').value;
+            const coordinates = document.getElementById('coordinates').value;
+            const titleNumber = document.getElementById('titleNumber').value;
+            const satellitePhoto = document.getElementById('satellitePhoto').value;
+
+            const formData = {
+                ownerName,
+                location,
+                size,
+                coordinates,
+                titleNumber,
+                satellitePhoto
+            };
+
+            // Assuming you have a function to make an AJAX request (e.g., using fetch or XMLHttpRequest)
+            // You need to replace 'your_server_url' with the actual URL where your server is running
+            fetch('your_server_url/title', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success, e.g., show a success message to the user
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error, e.g., show an error message to the user
+            });
+        }
+    </script>
+</body>
+</html>
