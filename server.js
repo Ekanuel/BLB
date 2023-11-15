@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 //do not forget to import the necessary modules,
 const tables = require('./models');
@@ -9,17 +10,18 @@ const tables = require('./models');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //do not forget to connect to your mongoDb
 // mongodb+srv://admin:<password>@cluster0.htnqgcs.mongodb.net/?retryWrites=true&w=majority
-mongoose.connect('mongodb+srv://admin:<admin@admin>@cluster0.htnqgcs.mongodb.net/blb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb+srv://admin:' + encodeURIComponent('admin@admin') + '@cluster0.htnqgcs.mongodb.net/blb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //do not forget to set up routes to serve out the html file
 app.post('/citizen', async (req, res) => {
     try {
-        const newCitizen = await Citizen.create(req.body);
+        const newCitizen = await tables.Citizen.create(req.body);
         res.status(201).json(newCitizen);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -28,7 +30,7 @@ app.post('/citizen', async (req, res) => {
 
 app.post('/title', async (req, res) => {
     try {
-        const newTitle = await Title.create(req.body);
+        const newTitle = await tables.Title.create(req.body);
         res.status(201).json(newTitle);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -37,7 +39,7 @@ app.post('/title', async (req, res) => {
 
 app.get('/citizens', async (req, res) => {
     try {
-        const citizens = await Citizen.find();
+        const citizens = await tables.Citizen.find();
         res.status(200).json(citizens);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -46,7 +48,7 @@ app.get('/citizens', async (req, res) => {
 
 app.get('/titles', async (req, res) => {
     try {
-        const titles = await Title.find();
+        const titles = await tables.Title.find();
         res.status(200).json(titles);
     } catch (error) {
         res.status(500).json({ error: error.message });
