@@ -56,6 +56,16 @@ app.get('/titles', async (req, res) => {
 });
 
 // Do not forget to handle your form posts for the relevant forms
+app.get('/titles/:titleNumber', async (req, res) => {
+    try {
+        const titleNumber = req.params.titleNumber;
+        const title = await tables.Title.findOne({ titleNumber });
+        
+        res.status(200).json(title);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 // Do not forget to handle form gets for the necessary data to display on the user interface.
 

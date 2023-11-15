@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Titles</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h2>View All Titles</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Owner's Name</th>
+                    <th>Location</th>
+                    <th>Size</th>
+                    <th>Coordinates</th>
+                    <th>Title Number</th>
+                    <th>Satellite Photo (Link)</th>
+                </tr>
+            </thead>
+            <tbody id="titlesTableBody">
+                <!-- Table rows will be added dynamically with JavaScript -->
+            </tbody>
+        </table>
+
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+
+    <script>
+        // Fetch titles data and populate the table
+        fetch('/titles')
+            .then(response => response.json())
+            .then(titles => {
+                const titlesTableBody = document.getElementById('titlesTableBody');
+                titles.forEach(title => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${title.ownerName}</td>
+                        <td>${title.location}</td>
+                        <td>${title.size}</td>
+                        <td>${title.coordinates}</td>
+                        <td>${title.titleNumber}</td>
+                        <td>${title.satellitePhoto}</td>
+                    `;
+                    titlesTableBody.appendChild(row);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching titles:', error);
+            });
+    </script>
+</body>
+</html>
