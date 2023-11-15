@@ -8,3 +8,10 @@
     margin-top: 30px !important;
     padding: 10px;
 }
+.si{
+    min-height: 200px;
+    max-height: 201px;
+}
+.si-1{
+    overflow: scroll;
+}

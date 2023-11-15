@@ -37,11 +37,11 @@
     <div class="container">
         <div class="jumbotron">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-4 si">
                     <h3 class="text-center">TITLE TRANSFER</h3>
                     <p>create the title tranfer form under this section</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 si">
                     <h4>TITLE SEARCH</h4>
                     <form action="" method="get">
                         <label for="search">TITLE NUMBER:</label>
@@ -49,13 +49,13 @@
                         <input type="button" onclick="searchTitle()" value="SEARCH" class="btn btn-success">
                     </form>
                 </div>
+                <div id="searchResults" class="col-md-4 si si-1">
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div id="searchResults" class="col-md-8">
-        </div>
     </div>
     <script>
         function searchTitle() {
@@ -67,7 +67,6 @@
                     displaySearchResults(title);
                 })
                 .catch(error => {
-                    alert('Not found');
                     console.log('Error searching title:', error);
                 });
         }
@@ -80,6 +79,7 @@
 
             // Display the search result
             if (title) {
+                alert('Title Found');
                 const resultHTML = `
                     <h4>Search Result</h4>
                     <p><strong>Owner's Name:</strong> ${title.ownerName}</p>
@@ -91,6 +91,7 @@
                 `;
                 searchResultsDiv.innerHTML = resultHTML;
             } else {
+                alert('Title Not Found');
                 searchResultsDiv.innerHTML = '<p>No matching title found.</p>';
             }
         }
