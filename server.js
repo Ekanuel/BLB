@@ -13,7 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //do not forget to connect to your mongoDb
-mongoose.connect('mongodb+srv://your-connection-string', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongodb+srv://admin:<password>@cluster0.htnqgcs.mongodb.net/?retryWrites=true&w=majority
+mongoose.connect('mongodb+srv://admin:<admin@admin>@cluster0.htnqgcs.mongodb.net/blb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //do not forget to set up routes to serve out the html file
 app.post('/citizen', async (req, res) => {
